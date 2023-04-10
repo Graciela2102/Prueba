@@ -1,0 +1,46 @@
+
+<mat-card id="card" style="text-align: center;">
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Clave" formControlName="clave">
+          <mat-error *ngIf="!formGroup.controls['clave'].valid && formGroup.controls['clave'].touched">
+            {{ getErrorEmail() }}
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="categoria" formControlName="categoria">
+          <mat-error *ngIf="!formGroup.controls['categoria'].valid && formGroup.controls['categoria'].touched">
+            {{ getErrorCategoria() }}
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="nombre" formControlName="nombre">
+          <mat-error *ngIf="!formGroup.controls['nombre'].valid && formGroup.controls['nombre'].touched">
+            {{ getErrorNombre() }}
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Guardar</button>
+    </div>
+
+  </form>
+
+</mat-card>
+ <div >
+    {{ post | json }}
+  </div>
+
