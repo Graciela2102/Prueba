@@ -16,15 +16,7 @@ export class CreateArticleComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private articleService:ArticleService,private route:Router,@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.data)
-    if(this.data.action=="UPDATE"){
-      this.articleService.getArticleById(this.data.id).subscribe(d => {
-        this.formGroup.get("clave").setValue(d.clave);
-        this.formGroup.get("categoria").setValue(d.categoria);
-        this.formGroup.get("nombre").setValue(d.nombre);
 
-      })
-    }
     this.formGroup = new FormGroup({
       'clave':new FormControl(null,[Validators.required]),
       'categoria':new FormControl(null,[Validators.required]),
@@ -33,6 +25,18 @@ export class CreateArticleComponent implements OnInit {
       'activo':new FormControl(true,[])
     });
    // this.formBuilder.group(this.formGroup)
+    console.log(this.data)
+    if(this.data.action=="UPDATE"){
+      this.articleService.getArticleById(this.data.id).subscribe(d => {
+        this.formGroup.get("clave").setValue(d.clave);
+        this.formGroup.get("categoria").setValue(d.categoria);
+        this.formGroup.get("nombre").setValue(d.nombre);
+
+      })
+    }else{
+
+    }
+
   }
 
   getErrorEmail() {

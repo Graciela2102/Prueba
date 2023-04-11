@@ -6,6 +6,8 @@ import { Categoria } from 'src/app/article/models/article.model';
 import { MatDialog } from '@angular/material/dialog';
 
 import { CreateCategoryComponent } from '../create-category/create-category.component';
+import { ThisReceiver } from '@angular/compiler';
+import { DialogDeleteComponent } from 'src/app/directive/dialog-delete/dialog-delete.component';
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories.component.html',
@@ -20,7 +22,16 @@ export class ListCategoriesComponent implements OnInit {
     //this.categoryService.createCategory().subscribe( c=>console.log(c))
     this.loadCategory()
   }
-  openDialog(id:any) {
+  openDialog() {
+
+    const dialogRef = this.dialog.open(CreateCategoryComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+       this.loadCategory();
+    });
+  }
+
+  openDialogUpdate(id:any) {
     const dialogRef = this.dialog.open(CreateCategoryComponent,{data:{id:id,action:"UPDATE"}});
 
     dialogRef.afterClosed().subscribe(result => {
@@ -28,8 +39,12 @@ export class ListCategoriesComponent implements OnInit {
     });
   }
 
-  addNew(){
-    this.router.navigate(['/category/new-category'])
+  openDialogDelete(id:any) {
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.delete(id);
+    });
   }
 
   loadCategory(){

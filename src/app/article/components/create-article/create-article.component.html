@@ -33,14 +33,10 @@
       </mat-card-content>
     </mat-card>
     <div class="form-element">
-      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Guardar</button>
+      <button mat-raised-button mat-button [mat-dialog-close]="true" cdkFocusInitial  color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Guardar</button>
     </div>
 
   </form>
-
-
-
-
 </mat-dialog-content>
 <div >
   {{ post | json }}

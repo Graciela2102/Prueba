@@ -15,9 +15,13 @@ import { MatTableModule } from '@angular/material/table'
 import {CdkTableModule} from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
+import { DialogDeleteComponent } from './directive/dialog-delete/dialog-delete.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    DialogDeleteComponent,
+
 
   ],
   imports: [

@@ -6,6 +6,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { CreateArticleComponent } from '../create-article/create-article.component';
+import { DialogDeleteComponent } from 'src/app/directive/dialog-delete/dialog-delete.component';
+import { timeInterval } from 'rxjs';
 @Component({
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
@@ -15,19 +17,32 @@ export class ListArticlesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'version', 'clave', 'nombre','categoria','precios','activo'];
   dataSource:DatArticle[]=[];
   constructor( private articleService:ArticleService,private router:Router,public dialog: MatDialog) { }
-  openDialog(id:any) {
+  openDialog() {
+    const dialogRef = this.dialog.open(CreateArticleComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.loadArticles();
+    });
+  }
+
+  openDialogUpdate(id:any) {
     const dialogRef = this.dialog.open(CreateArticleComponent,{data:{id:id,action:"UPDATE"}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+    });
+  }
+   openDialogDelete(id:any) {
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.delete(id);
     });
   }
   ngOnInit(): void {
     //this.articleService.createArticle().subscribe( d=>console.log(d))
     this.loadArticles()
   }
-  addNew(){
-    this.router.navigate(['/article/new-article'])
-  }
+
   loadArticles(){
     this.articleService.getAllArticles().subscribe( d => this.dataSource = d.data)
   }

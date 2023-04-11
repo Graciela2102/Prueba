@@ -15,6 +15,13 @@ export class CreateCategoryComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private route:Router,private CategoriaService:CategoryService,@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.formGroup = new FormGroup({
+      'clave':new FormControl(null,[Validators.required]),
+      'fechaCreado':new FormControl(null,[Validators.required]),
+      'nombre':new FormControl(null,[Validators.required]),
+      'activo':new FormControl(true,[])
+    });
+   // this.formBuilder.group(this.formGroup)
     console.log(this.data)
     if(this.data.action=="UPDATE"){
       this.CategoriaService.getCategoryById(this.data.id).subscribe(d => {
@@ -24,13 +31,7 @@ export class CreateCategoryComponent implements OnInit {
 
       })
     }
-    this.formGroup = new FormGroup({
-      'clave':new FormControl(null,[Validators.required]),
-      'fechaCreado':new FormControl(null,[Validators.required]),
-      'nombre':new FormControl(null,[Validators.required]),
-      'activo':new FormControl(true,[])
-    });
-   // this.formBuilder.group(this.formGroup)
+
   }
   getErrorClave() {
     return this.formGroup.get('clave').hasError('required') ? 'Campo requerido':''
