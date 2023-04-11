@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { CreateArticleComponent } from '../create-article/create-article.component';
 @Component({
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
@@ -13,8 +14,13 @@ import { Router } from '@angular/router';
 export class ListArticlesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'version', 'clave', 'nombre','categoria','precios','activo'];
   dataSource:DatArticle[]=[];
-  constructor( private articleService:ArticleService,private router:Router) { }
-
+  constructor( private articleService:ArticleService,private router:Router,public dialog: MatDialog) { }
+  openDialog(id:any) {
+    const dialogRef = this.dialog.open(CreateArticleComponent,{data:{id:id,action:"UPDATE"}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
     //this.articleService.createArticle().subscribe( d=>console.log(d))
     this.loadArticles()

@@ -22,4 +22,8 @@ export class ArticleService {
   deleteById(id:any){
     return this.http.delete<any>( `${environment.host}/articulo/${id}`)
   }
+  getArticleById(id:any){
+    return this.http.get<any>( `${environment.host}/articulo/${id}`)
+
+  }
 }

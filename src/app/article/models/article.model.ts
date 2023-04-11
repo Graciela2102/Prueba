@@ -13,6 +13,11 @@ export interface DatArticle {
   precios:   Precio[];
   activo:    boolean;
 }
+export interface category{
+
+  data:  Categoria[];
+  total: number;
+}
 
 export interface Categoria {
   id:          number;
@@ -20,6 +25,7 @@ export interface Categoria {
   clave:       string;
   nombre:      string;
   fechaCreado: number;
+  activo:    boolean;
 }
 
 export interface Precio {

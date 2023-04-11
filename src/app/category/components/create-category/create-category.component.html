@@ -1,13 +1,11 @@
 <mat-dialog-content class="mat-typography">
-
-
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form"id="card" style="text-align: center;">
     <mat-card>
       <mat-card-content>
         <mat-form-field class="form-element">
           <input matInput placeholder="Clave" formControlName="clave">
-          <mat-error  *ngIf="!formGroup.controls['clave'].valid && formGroup.controls['clave'].touched">
-            {{ getErrorEmail() }}
+          <mat-error *ngIf="!formGroup.controls['clave'].valid && formGroup.controls['clave'].touched">
+            {{ getErrorClave() }}
           </mat-error>
         </mat-form-field>
       </mat-card-content>
@@ -15,9 +13,9 @@
     <mat-card>
       <mat-card-content>
         <mat-form-field class="form-element">
-          <input matInput placeholder="categoria" formControlName="categoria">
-          <mat-error *ngIf="!formGroup.controls['categoria'].valid && formGroup.controls['categoria'].touched">
-            {{ getErrorCategoria() }}
+          <input matInput placeholder="fechaCreado" formControlName="fechaCreado">
+          <mat-error *ngIf="!formGroup.controls['fechaCreado'].valid && formGroup.controls['fechaCreado'].touched">
+            {{ getErrorfechaCreado() }}
           </mat-error>
         </mat-form-field>
       </mat-card-content>
@@ -37,10 +35,6 @@
     </div>
 
   </form>
-
-
-
-
 </mat-dialog-content>
 <div >
   {{ post | json }}

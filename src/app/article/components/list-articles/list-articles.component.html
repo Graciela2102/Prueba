@@ -27,7 +27,7 @@
       <td >{{data.activo}}</td>
       <td>
         <div class="example-button-row">
-          <button mat-raised-button color="primary">Editar</button>
+          <button mat-raised-button color="primary" (click)="openDialog(data.id)">Editar</button>
           <button mat-raised-button color="warn" (click)="delete(data.id)">Eliminar</button>
         </div>
       </td>
