@@ -14,7 +14,7 @@ import { timeInterval } from 'rxjs';
   styleUrls: ['./list-articles.component.css']
 })
 export class ListArticlesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'version', 'clave', 'nombre','categoria','precios','activo'];
+  //displayedColumns: string[] = ['id', 'version', 'clave', 'nombre','categoria','precios','activo'];
   dataSource:DatArticle[]=[];
   constructor( private articleService:ArticleService,private router:Router,public dialog: MatDialog) { }
   openDialog() {
@@ -29,6 +29,8 @@ export class ListArticlesComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateArticleComponent,{data:{id:id,action:"UPDATE"}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+
+
     });
   }
    openDialogDelete(id:any) {

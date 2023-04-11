@@ -6,7 +6,6 @@ export interface Article{
 
 export interface DatArticle {
   id:        number;
-  version:   number;
   clave:     string;
   nombre:    string;
   categoria: Categoria;
@@ -21,11 +20,10 @@ export interface category{
 
 export interface Categoria {
   id:          number;
-  version:     number;
   clave:       string;
   nombre:      string;
   fechaCreado: number;
-  activo:    boolean;
+  
 }
 
 export interface Precio {

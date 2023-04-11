@@ -14,7 +14,7 @@ import { DialogDeleteComponent } from 'src/app/directive/dialog-delete/dialog-de
   styleUrls: ['./list-categories.component.css']
 })
 export class ListCategoriesComponent implements OnInit {
-  displayedColumns: string[] = ['id','clave','fechaCreado','nombre','activo'];
+  displayedColumns: string[] = ['id','clave','fechaCreado','nombre'];
   dataSource:Categoria[]=[];
   constructor( private categoryService:CategoryService,private router:Router,public dialog: MatDialog) { }
 
@@ -23,8 +23,7 @@ export class ListCategoriesComponent implements OnInit {
     this.loadCategory()
   }
   openDialog() {
-
-    const dialogRef = this.dialog.open(CreateCategoryComponent);
+    const dialogRef = this.dialog.open(CreateCategoryComponent,{width:'500px'});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
        this.loadCategory();
@@ -32,7 +31,8 @@ export class ListCategoriesComponent implements OnInit {
   }
 
   openDialogUpdate(id:any) {
-    const dialogRef = this.dialog.open(CreateCategoryComponent,{data:{id:id,action:"UPDATE"}});
+    const dialogRef = this.dialog.open(CreateCategoryComponent,
+      {width:"500px", data:{id:id,action:"UPDATE"}});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

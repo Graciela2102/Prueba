@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 import { Inject } from '@angular/core';
 @Component({
   selector: 'app-create-category',
@@ -33,6 +34,8 @@ export class CreateCategoryComponent implements OnInit {
     }
 
   }
+
+
   getErrorClave() {
     return this.formGroup.get('clave').hasError('required') ? 'Campo requerido':''
       //this.formGroup.get('email').hasError('email') ? 'Not a valid email address' : '';
@@ -45,6 +48,7 @@ export class CreateCategoryComponent implements OnInit {
   }
   onSubmit(post:any) {
     let value = this.formGroup.value;
+    value.fechaCreado = new Date(value.fechaCreado).getTime()
     this.CategoriaService.createCategory(value).subscribe(c => this.route.navigate(['/category']))
   }
 

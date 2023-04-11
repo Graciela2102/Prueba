@@ -12,16 +12,18 @@
         </mat-form-field>
       </mat-card-content>
     </mat-card>
-    <mat-card>
+     <mat-card>
       <mat-card-content>
-        <mat-form-field class="form-element">
-          <input matInput placeholder="categoria" formControlName="categoria">
-          <mat-error *ngIf="!formGroup.controls['categoria'].valid && formGroup.controls['categoria'].touched">
-            {{ getErrorCategoria() }}
-          </mat-error>
-        </mat-form-field>
+        <mat-form-field appearance="fill" >
+        <mat-label>categoria</mat-label>
+        <mat-select  matInput [ngModelOptions]="{standalone: true}"  formControlName="categoria" required>
+
+        </mat-select>
+      </mat-form-field>
+
       </mat-card-content>
     </mat-card>
+
     <mat-card>
       <mat-card-content>
         <mat-form-field class="form-element">
@@ -32,6 +34,22 @@
         </mat-form-field>
       </mat-card-content>
     </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Precios</mat-label>
+          <mat-select formControlName="precios" multiple>
+            <mat-select-trigger>
+              {{formGroup.get('precios').value?.[0] || '' | json }}
+              <span *ngIf="(formGroup.get('precios').value?.length || 0) > 1" class="example-additional-selection">
+                (+{{ (formGroup.get('precios').value?.length || 0) - 1 | json }} {{formGroup.get('precios').value?.length === 2 ? 'precio' : 'precios'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let price of pricesList" [value]="price">{{price.precio}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
     <div class="form-element">
       <button mat-raised-button mat-button [mat-dialog-close]="true" cdkFocusInitial  color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Guardar</button>
     </div>
@@ -39,5 +57,4 @@
   </form>
 </mat-dialog-content>
 <div >
-  {{ post | json }}
 </div>

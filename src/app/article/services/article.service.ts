@@ -25,7 +25,9 @@ export class ArticleService {
   getArticleById(id:any){
     return this.http.get<any>( `${environment.host}/articulo/${id}`)
   }
-  editArticleById(id:any){
-    return this.http.get<any>( `${environment.host}/articulo/${id}`)
+  EditArticle(id:any):Observable<any>{
+
+    return this.http.patch( `${environment.host}/articulo/`,id)
   }
+
 }

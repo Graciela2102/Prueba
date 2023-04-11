@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Version</th>
       <th scope="col">Clave</th>
       <th scope="col">nombre</th>
       <th scope="col">Categoria</th>
@@ -19,16 +18,14 @@
     <tr *ngFor="let data of dataSource">
 
       <td >{{data.id}}</td>
-      <td >{{data.version}}</td>
       <td >{{data.clave}}</td>
       <td >{{data.nombre}}</td>
-      <td >{{data.categoria.nombre}}</td>
+      <td >{{data.categoria.id}}</td>
       <td >{{data.precios | json }}</td>
       <td >{{data.activo}}</td>
       <td>
         <div class="example-button-row">
           <button mat-raised-button color="primary" (click)="openDialogUpdate(data.id)">Editar</button>
-          <!-- //<button mat-raised-button color="warn" (click)="delete(data.id)">Eliminar</button> -->
           <button mat-raised-button color="warn" (click)="openDialogDelete(data.id)">Eliminar</button>
         </div>
       </td>

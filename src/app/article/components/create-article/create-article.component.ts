@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { Inject } from '@angular/core';
+import { DatArticle } from '../../models/article.model';
 
 @Component({
   selector: 'app-create-article',
@@ -12,8 +14,18 @@ import { Inject } from '@angular/core';
 })
 export class CreateArticleComponent implements OnInit {
   formGroup:any ;
+
+
   post:any;
-  constructor(private formBuilder: FormBuilder,private articleService:ArticleService,private route:Router,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  pricesList=[{"precio":1300},{"precio":1500},{"precio":1900}]
+  prices = new FormControl('');
+  constructor(
+    private formBuilder: FormBuilder,
+    private articleService:ArticleService,
+    private route:Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private matSnackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
 
@@ -21,7 +33,7 @@ export class CreateArticleComponent implements OnInit {
       'clave':new FormControl(null,[Validators.required]),
       'categoria':new FormControl(null,[Validators.required]),
       'nombre':new FormControl(null,[Validators.required]),
-      'precios':new FormControl([{"precio":1300},{"precio":1400}],[]),
+      'precios':new FormControl(null,[]),
       'activo':new FormControl(true,[])
     });
    // this.formBuilder.group(this.formGroup)
@@ -52,7 +64,21 @@ export class CreateArticleComponent implements OnInit {
 
   onSubmit(post:any) {
     let value = this.formGroup.value;
-    this.articleService.createArticle(value).subscribe(c => this.route.navigate(['/article']))
+    this.articleService.createArticle(value).subscribe(c => {
+
+       this.route.navigate(['/article']);
+
+       this.matSnackBar.open(c.message, '' , {
+        duration:5000,
+        panelClass: ['sucess-msg']
+    } )
+  },(error)=>{
+    this.matSnackBar.open(error.error.error, '' , {
+      duration:5000,
+      panelClass: ['error-msg']
+})
+  }
+  )
   }
 
 }
